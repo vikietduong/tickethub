@@ -45,9 +45,13 @@ export function OrganizerHeader() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const isOperations =
+    pathname === "/organizer/dashboard" ||
+    /\/(stats|staff|monitor)$/.test(pathname);
   const isEventsActive =
     pathname.startsWith("/organizer/events") &&
-    pathname !== "/organizer/events/new";
+    pathname !== "/organizer/events/new" &&
+    !isOperations;
   const isCreatePage = pathname.startsWith("/organizer/events/new");
 
   return (
@@ -75,6 +79,13 @@ export function OrganizerHeader() {
             >
               <Calendar className="size-3.5 sm:size-4" />
               <span>Sự kiện</span>
+            </Link>
+            <Link
+              href="/organizer/dashboard"
+              aria-current={isOperations ? "page" : undefined}
+              className={`hidden h-9 items-center rounded-md px-2.5 text-xs font-medium sm:inline-flex sm:text-sm ${isOperations ? "bg-secondary text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
+            >
+              Vận hành
             </Link>
           </nav>
         </div>
@@ -125,6 +136,14 @@ export function OrganizerHeader() {
                 </Link>
 
                 <div className="py-1">
+                  <Link
+                    href="/organizer/dashboard"
+                    role="menuitem"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block px-3.5 py-2 text-xs font-medium text-foreground hover:bg-secondary"
+                  >
+                    Vận hành và báo cáo
+                  </Link>
                   <Link
                     href="/my-tickets"
                     role="menuitem"
