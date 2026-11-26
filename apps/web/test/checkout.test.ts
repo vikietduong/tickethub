@@ -5,7 +5,7 @@ import {
   remainingSeconds,
   paymentState,
   safePaymentUrl,
-} from "../src/lib/checkout.ts";
+} from "../src/features/payment/domain/checkout.ts";
 
 test("Countdown uses deadline and catches elapsed time after suspended tab", () => {
   assert.equal(remainingSeconds(300_000, 0), 300);

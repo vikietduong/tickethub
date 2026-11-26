@@ -81,14 +81,14 @@ test("Thiếu đơn không tạo checkout giả và đơn không tồn tại kh�
 }) => {
   await loginBrowser(page);
   await page.goto("/checkout");
-  await expect(page.getByRole("alert")).toContainText(
+  await expect(page.getByRole("main").getByRole("alert")).toContainText(
     "Không có mã đơn hàng hợp lệ",
   );
   await expect(
     page.getByRole("button", { name: "Thanh toán ngay qua VNPay" }),
   ).toHaveCount(0);
   await page.goto("/checkout?orderId=00000000-0000-4000-8000-000000000000");
-  await expect(page.getByRole("alert")).toBeVisible();
+  await expect(page.getByRole("main").getByRole("alert")).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Thanh toán ngay qua VNPay" }),
   ).toHaveCount(0);
